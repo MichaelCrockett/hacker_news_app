@@ -1,17 +1,19 @@
 import React from 'react';
 import StoryItem from './StoryItem';
 
-const StoryList = (props) => {
-  const storyNodes = props.topStories.map((topStory, index) => {
+const StoryList = ({stories}) => {
+  const storyNodes = stories.map((story, index) => {
     return (
-      <StoryItem key={index}
-      topStory={topStory}/>
+      <StoryItem
+      story={story}
+      key={index}>
+      </StoryItem>
     )
   })
+
   return (
     <h2>{ storyNodes }</h2>
   )
-
 }
 
 export default StoryList;

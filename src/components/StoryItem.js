@@ -1,8 +1,11 @@
 import React from 'react';
 
-const StoryItem = ({ topStory }) => {
+const StoryItem = ({story}) => {
   return (
-    <p>{ topStory }</p>
+    <div>
+    <h3>{ story.title }</h3>
+    <p>{ story.children }</p>
+    </div>
   )
 }
 

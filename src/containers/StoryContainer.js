@@ -8,26 +8,35 @@ class StoryContainer extends Component {
     super(props);
 
     this.state = {
-      topStories: [],
-      story: []
+      stories: []
     };
   }
 
   componentDidMount() {
     fetch("https://hacker-news.firebaseio.com/v0/topstories.json")
-    .then(res => res.json())
-    .then(data => this.setState({ topStories: data }))
-    .catch(console.error);
+      .then(res => res.json())
+      .then(storyIds => {
+        const topTen = storyIds.slice(0,10);
 
-    fetch("https://hacker-news.firebaseio.com/v0/item/{storyId}.json")
-    .then(res => res.json())
-    .then(data => this.setState({ story: data }))
-    .catch(console.error);
+        const promiseArray = topTen.map(storyId => {
+          return fetch(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`)
+            .then(res => res.json());
+        });
+
+        Promise.all(promiseArray)
+          .then(stories => this.setState({ stories: stories }));
+      })
+      .catch(console.error);
+
+    // fetch("https://hacker-news.firebaseio.com/v0/item/{storyId}.json")
+    // .then(res => res.json())
+    // .then(data => this.setState({ story: data }))
+    // .catch(console.error);
   }
 
   render () {
     return (
-      <StoryList topStories={this.state.topStories}></StoryList>
+      <StoryList stories={this.state.stories}></StoryList>
     )
   }
 
