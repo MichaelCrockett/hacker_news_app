@@ -1,9 +1,8 @@
 import React from 'react';
 
-const StoryItem = (props) => {
+const StoryItem = ({ topStory }) => {
   return (
-    <p>I am StoryItem!</p>
-
+    <p>{ topStory }</p>
   )
 }
 

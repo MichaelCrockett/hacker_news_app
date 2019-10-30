@@ -15,9 +15,9 @@ class StoryContainer extends Component {
 
   componentDidMount() {
     fetch("https://hacker-news.firebaseio.com/v0/topstories.json")
-      .then(res => res.json())
-      .then(data => this.setState({ topStories: data }))
-      .catch(console.error);
+    .then(res => res.json())
+    .then(data => this.setState({ topStories: data }))
+    .catch(console.error);
 
     fetch("https://hacker-news.firebaseio.com/v0/item/{storyId}.json")
     .then(res => res.json())
@@ -27,7 +27,7 @@ class StoryContainer extends Component {
 
   render () {
     return (
-      <StoryList />
+      <StoryList topStories={this.state.topStories}></StoryList>
     )
   }
 
